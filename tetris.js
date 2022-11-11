@@ -51,7 +51,7 @@ export class Tetris extends Scene {
     constructor() {
         super();
 
-        // At the beginning of our program, load one of each of these shape definitions onto the GPU.
+        // load one of each of these shape definitions onto the GPU.
         this.shapes = {
             'cube': new Cube(),
             'outline': new Cube_Outline(),
@@ -324,7 +324,6 @@ export class Tetris extends Scene {
         this.sounds.move.volume = 0.4;
         this.sounds.clear.volume = 0.5;
         this.sounds.bgm.loop = true;
-        /* this.sounds.bgm.play();*/
     }
 
     generate_random_piece() {
@@ -391,14 +390,6 @@ export class Tetris extends Scene {
                 let temp = this.curr_x;
                 this.move(1, 0);
                 if (temp == this.curr_x) {
-                    /*let temp2 = this.curr_y;
-                    this.move(0, -1)
-
-                    if (temp2 == this.curr_y)
-                        this.gameover();
-
-                    else
-                        this.move(0, 1)*/
                     this.rotate_count--;
                     break;
 
@@ -419,13 +410,6 @@ export class Tetris extends Scene {
                 let temp = this.curr_x;
                 this.move(-1, 0);
                 if (temp == this.curr_x) {
-                    /*this.move(0, -1)
-
-                    if (this.curr_y == 0)
-                        this.gameover();
-
-                    else
-                        this.move(0, 1)*/
                     this.rotate_count--;
                     break;
 
@@ -452,20 +436,9 @@ export class Tetris extends Scene {
                 this.rotate_count--;
                 break;
             }
-            /*this.move(0,-1)*/
 
             y_dindex = this.curr_y + 3 - this.down_index(this.curr_piece);
         }
-
-        /*while(y_uindex <= 0)
-        {
-            let temp = this.curr_y;
-            this.move(0,1);
-            if(this.curr_y == temp)
-                this.gameover()
-
-            y_uindex = this.curr_y + this.up_index(this.curr_piece);
-        }*/
 
         if(x_lindex <= 0 || x_rindex >= this.width-1 || y_dindex >= this.height-1 || this.overlap()) {
             if(r_temp == this.rotate_count)
@@ -497,14 +470,6 @@ export class Tetris extends Scene {
                     break;
             }
         }
-        /*while (this.overlap()) {
-            this.move(0, -1)
-            if (this.curr_y == 0)
-                this.gameover();
-        }
-        this.move(0,1);
-    }*/
-
     }
 
     hardmove(x,y)
@@ -577,7 +542,6 @@ export class Tetris extends Scene {
 
     // Included Ghost Move
     move(x, y, g_state) {
-        // TODO: Move piece in specified direction
         this.curr_x += x;
         this.curr_y += y;
 
@@ -699,7 +663,6 @@ export class Tetris extends Scene {
     {
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                //if(this.grid[this.height_boundary(this.curr_y+j)][this.width_boundary(this.curr_x+i)]!=0 && this.curr_piece[i][j]!=0)
                 if (this.grid[this.curr_y + i][this.curr_x + j] != 0) {
                     if(this.curr_piece[i][j] != 0)
                         return true;
@@ -777,7 +740,6 @@ export class Tetris extends Scene {
                 }
             }
             if (counter == 10) {
-                //return;
                 this.sounds.clear.currentTime = 0;
                 this.sounds.clear.play();
                 this.clear_number++;
@@ -931,12 +893,10 @@ export class Tetris extends Scene {
 
         // Setup -- This part sets up the scene's overall camera matrix, projection matrix, and lights:
         if (!context.scratchpad.controls) {
-            //this.children.push(context.scratchpad.controls = new defs.Movement_Controls());
             // Define the global camera and projection matrices, which are stored in program_state.
             program_state.set_camera(Mat4.translation(-12, 24, -70));
             program_state.lights = [new Light(vec4(10, -10, 100, 1), hex_color("#FFFFFF"), 100)];
         }
-        //program_state.set_camera(Mat4.translation(1, 1, -8));
         program_state.projection_transform = Mat4.perspective(
             Math.PI / 4, context.width / context.height, 1, 1000);
 
