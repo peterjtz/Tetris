@@ -35,3 +35,6 @@ Clearing more lines at a time will grant the player more points.
 
 ## Advanced Feature
 * Collision detection of blocks.
+
+## Game Demo
+![Recordit GIF](https://s4.gifyu.com/images/gameDemo.gif)
